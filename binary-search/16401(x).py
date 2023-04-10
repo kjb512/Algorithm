@@ -1,28 +1,31 @@
 import sys
+
 input = sys.stdin.readline
 
-m, n = map(int, input().split())
+m,n = map(int, input().split())
+l = list(map(int, input().split()))
 
-a = list(map(int, input().split()))
 
 def check(x):
     if x == 0:
         return True
     cnt = 0
-
-    for i in a:
+    for i in l:
         cnt += i // x
 
-    return cnt >= m
+    return cnt>= m
 
-st = 0
-en = max(a)
+st = 1
+en = max(l)
+res = 0
 
-while st < en:
-    mid = (st + en + 1) // 2
+while st <= en:
+    mid = (st+en)//2
+
     if check(mid):
-        st = mid
+        st = mid + 1
+        res = max(res, mid)
     else:
         en = mid - 1
 
-print(st)
+print(res)
